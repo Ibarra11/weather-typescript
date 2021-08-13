@@ -1,0 +1,6 @@
+.Sidebar {
+  /* flex-grow: 0.5; */
+  width: 300px;
+  border-right: 2px solid #f18f01;
+  background-color: #2e4057;
+}

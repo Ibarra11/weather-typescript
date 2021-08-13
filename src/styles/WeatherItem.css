@@ -1,0 +1,42 @@
+.WeatherItem {
+  display: flex;
+  flex-grow: 1;
+  border: 1px solid yellow;
+  justify-content: space-between;
+  /* align-items: center; */
+  padding: 1rem;
+  color: #bbc9d0;
+}
+
+.WeatherItem-icon {
+  width: 75px;
+}
+
+.WeatherItem-data {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  border: 1px solid red;
+}
+
+.WeatherItem-data-date {
+  font-size: 1rem;
+}
+
+.WeatherItem-data-temperature {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  justify-content: center;
+  border: 3px soild green;
+}
+
+.Weather-item-data-temperature-selection {
+  font-size: 1.5rem;
+}
+
+.Weather-item-data-temperature-selection p:first-child {
+  margin-bottom: 0.5rem;
+}
