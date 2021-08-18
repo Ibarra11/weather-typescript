@@ -38,3 +38,7 @@ export type WeatherHour = {
   time: string;
   time_epoch: number;
 };
+
+export type Degrees = {
+  degree: 'F' | 'C';
+};
