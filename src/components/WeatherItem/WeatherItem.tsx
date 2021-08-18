@@ -7,26 +7,20 @@ const WeatherItem = ({
   hour,
   currWeatherId,
 }: WeatherListType & { currWeatherId: number | undefined }) => {
-  console.log(day);
-  console.log(date);
-  console.log(hour);
-  console.log(currWeatherId);
   const { icon } = day.condition;
   const { avgtemp_f, avgtemp_c } = day;
   return (
     <div className="WeatherItem">
       <img className="WeatherItem-icon" src={`https:${icon}`} alt="weather icon" />
 
-      <div className="WeatherItem-data">
-        <div className="WeatherItem-data-date">
-          <p>{date}</p>
+      <div className="flex">
+        <div className="WeatherItem-data">
+          <p className="WeatherItem-data-date">{date}</p>
+          <p className="WeatherItem-data-avgtemp">{avgtemp_f}</p>
         </div>
-        <div className="WeatherItem-data-temperature">
-          <p>{avgtemp_f}</p>
-          <div className="Weather-item-data-temperature-selection">
-            <p>C</p>
-            <p>F</p>
-          </div>
+        <div className="WeatherItem-buttons">
+          <button className="temperature-button active">C</button>
+          <button className="temperature-button">F</button>
         </div>
       </div>
     </div>

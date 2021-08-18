@@ -1,6 +1,5 @@
 .WeatherItem {
   display: flex;
-  flex-grow: 1;
   border: 1px solid yellow;
   justify-content: space-between;
   /* align-items: center; */
@@ -10,33 +9,46 @@
 
 .WeatherItem-icon {
   width: 75px;
+  border: 1px solid red;
+}
+.flex {
+  display: flex;
+  border: 1px solid green;
+  flex-grow: 1;
 }
 
 .WeatherItem-data {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  justify-content: space-between;
-  text-align: center;
-  border: 1px solid red;
-}
-
-.WeatherItem-data-date {
-  font-size: 1rem;
-}
-
-.WeatherItem-data-temperature {
-  display: flex;
+  justify-content: space-around;
   align-items: center;
-  font-size: 2rem;
-  justify-content: center;
-  border: 3px soild green;
 }
 
-.Weather-item-data-temperature-selection {
+.WeatherItem-data-avgtemp {
   font-size: 1.5rem;
 }
 
-.Weather-item-data-temperature-selection p:first-child {
+.WeatherItem-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.temperature-button {
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 1rem;
+}
+
+.temperature-button:hover {
+  cursor: pointer;
+}
+.temperature-button:first-child {
   margin-bottom: 0.5rem;
+}
+
+.active {
+  color: #fca311;
 }
