@@ -8,21 +8,12 @@ import axios from 'axios';
 const MY_KEY = process.env.REACT_APP_API_KEY;
 const BASE_URL = 'http://api.weatherapi.com/v1/forecast.json?key=';
 
-type WeatherObject = {
-  condition: { text: string; icon: string; code: number };
-  is_day: number;
-  last_updated: string;
-  last_updated_epoch: number;
-  temp_c: number;
-  temp_f: number;
-  uv: number;
-};
-
 function App() {
   const [weatherList, setWeatherList] = useState<WeatherListType[]>([]);
   const [currentWeather, setCurrentWeather] = useState<CurrentWeather>({});
   useEffect(() => {
-    axios.get(BASE_URL + MY_KEY + '&Q=Turlock&days=2&aqi=no&alerts=no').then((response) => {
+    axios.get(BASE_URL + MY_KEY + '&Q=Modesto&days=7&aqi=no&alerts=no').then((response) => {
+      console.log(response);
       setWeatherList(response.data.forecast.forecastday);
       setCurrentWeather(response.data.current);
     });
