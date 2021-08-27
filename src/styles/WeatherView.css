@@ -1,4 +1,73 @@
 .WeatherView {
-  background-color: #048ba8;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../images/clouds.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
   grid-column: 2;
+  text-align: center;
+}
+
+.WeatherView-data {
+  border: 2px solid yellow;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.WeatherView-temp {
+  display: flex;
+  border: 1px solid red;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
+}
+.WeatherView-temp-degrees {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+}
+
+.WeatherView-condition {
+  border: 1px solid blue;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.WeatherView-temp-icon {
+  height: 50%;
+}
+
+.WeatherView-temp-description {
+  font-size: 4rem;
+  color: #edf6f9;
+  margin: 0 1rem;
+}
+
+.WeatherView-location {
+  font-size: 2.5rem;
+  color: #edf6f9;
+  border: 1px solid orange;
+  flex-grow: 1;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.WeatherView-current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 3;
+
+  border: 1px solid green;
+  width: 50%;
+}
+
+.WeatherView-hourly {
+  flex-grow: 2;
+  border: 1px solid red;
+  width: 100%;
 }

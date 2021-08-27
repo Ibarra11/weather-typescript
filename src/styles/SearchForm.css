@@ -1,0 +1,24 @@
+.SearchForm {
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+}
+
+.SearchForm-input {
+  width: 30%;
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem;
+}
+
+.SearchForm-input:focus {
+  outline: none;
+}
+
+.SearchForm-button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+}

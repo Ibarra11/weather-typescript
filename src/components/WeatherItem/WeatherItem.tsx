@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-import { WeatherListType, Degrees } from '../../types';
+import { Degrees, ForecastDay } from '../../types';
 import '../../styles/WeatherItem.css';
-const WeatherItem = ({
-  date,
-  day,
-  hour,
-  currWeatherId,
-}: WeatherListType & { currWeatherId: number | undefined }) => {
+const WeatherItem = ({ date, day, hour }: ForecastDay) => {
   const { icon } = day.condition;
   const { avgtemp_f, avgtemp_c } = day;
   const [tempDegree, setTempDegree] = useState<Degrees['degree']>('F');

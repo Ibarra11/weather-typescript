@@ -1,15 +1,11 @@
 export type CurrentWeather = {
-  condition?: { text: string; icon: string; code: number };
-  is_day?: number;
-  last_updated?: string;
-  last_updated_epoch?: number;
-  temp_c?: number;
-  temp_f?: number;
-  uv?: number;
+  condition: { text: string; icon: string; code: number };
+  last_updated: string;
+  temp_c: number;
+  temp_f: number;
 };
 
 export type WeatherListType = {
-  astro: object;
   date: string;
   date_epoch: number;
   day: WeatherDay;
@@ -41,4 +37,10 @@ export type WeatherHour = {
 
 export type Degrees = {
   degree: 'F' | 'C';
+};
+
+export type ForecastDay = {
+  date: string;
+  day: WeatherDay;
+  hour: WeatherHour[];
 };
