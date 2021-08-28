@@ -3,6 +3,7 @@ export type CurrentWeather = {
   last_updated: string;
   temp_c: number;
   temp_f: number;
+  location: string;
 };
 
 export type WeatherListType = {

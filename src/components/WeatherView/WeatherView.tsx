@@ -2,7 +2,13 @@ import React from 'react';
 import '../../styles/WeatherView.css';
 import { CurrentWeather } from '../../types';
 import SearchForm from '../SearchForm/SearchForm';
-const WeatherView = ({ currentWeather }: { currentWeather: CurrentWeather | undefined }) => {
+const WeatherView = ({
+  currentWeather,
+  updateLocation,
+}: {
+  currentWeather: CurrentWeather | undefined;
+  updateLocation: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   let icon, temp_c, temp_f, text, last_updated;
 
   function displayWeather() {
@@ -11,10 +17,11 @@ const WeatherView = ({ currentWeather }: { currentWeather: CurrentWeather | unde
       temp_c,
       temp_f,
       last_updated,
+      location,
     } = currentWeather!;
     return (
       <div className="WeatherView-data">
-        <p className="WeatherView-location">Turlock, California</p>
+        <p className="WeatherView-location">{location}</p>
         <div className="WeatherView-current">
           <div className="WeatherView-temp">
             <img className="WeatherView-temp-icon" src={icon} alt="weather-icon" />
@@ -37,7 +44,13 @@ const WeatherView = ({ currentWeather }: { currentWeather: CurrentWeather | unde
   }
   return (
     <div className="WeatherView">
-      <SearchForm location="Turlock" placeholder="Search Location" onChange={'hello'} />
+      <SearchForm
+        updateLocation={updateLocation}
+        location="Turlock"
+        placeholder="Search Location"
+        onChange={'hello'}
+        type="text"
+      />
       {currentWeather ? displayWeather() : null}
     </div>
   );

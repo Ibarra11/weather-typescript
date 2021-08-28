@@ -17,17 +17,20 @@ function App() {
   }, [location]);
 
   async function requestForecast() {
-    const res = await axios.get(`${BASE_URL}${MY_KEY}&Q=modesto&days=7&aqi=no&alerts=no`);
+    console.log(location);
+    const res = await axios.get(`${BASE_URL}${MY_KEY}&Q=${location}&days=7&aqi=no&alerts=no`);
     console.log(res);
     const { forecastday }: { forecastday: ForecastDay[] } = res.data.forecast;
     const { current }: { current: CurrentWeather } = res.data;
+    const { name, region } = res.data.location;
+
     setWeatherList(forecastday);
-    setCurrentWeather(current);
+    setCurrentWeather({ ...current, location: name + ',' + region });
   }
   return (
     <div className="App">
       <Sidebar weatherList={weatherList} />
-      <WeatherView currentWeather={currentWeather} />
+      <WeatherView updateLocation={setLocation} currentWeather={currentWeather} />
     </div>
   );
 }
