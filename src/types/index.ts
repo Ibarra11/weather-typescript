@@ -29,11 +29,10 @@ export type WeatherDay = {
 
 export type WeatherHour = {
   condition: { text: string; icon: string };
-  is_day: number;
+
   temp_c: number;
   temp_f: number;
   time: string;
-  time_epoch: number;
 };
 
 export type Degrees = {

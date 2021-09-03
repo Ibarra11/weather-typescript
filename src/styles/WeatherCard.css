@@ -1,0 +1,4 @@
+.WeatherCard {
+  border: 1px solid yellow;
+  flex-grow: 1;
+}

@@ -1,13 +1,16 @@
 import React from 'react';
 import '../../styles/WeatherView.css';
-import { CurrentWeather } from '../../types';
+import { CurrentWeather, WeatherHour } from '../../types';
 import SearchForm from '../SearchForm/SearchForm';
+import WeatherCard from '../WeatherCard/WeatherCard';
 const WeatherView = ({
   currentWeather,
   updateLocation,
+  hourlyCurrentWeather,
 }: {
   currentWeather: CurrentWeather | undefined;
   updateLocation: React.Dispatch<React.SetStateAction<string>>;
+  hourlyCurrentWeather: WeatherHour[] | undefined;
 }) => {
   let icon, temp_c, temp_f, text, last_updated;
 
@@ -36,8 +39,11 @@ const WeatherView = ({
             <p>Updated 11:23 AM</p>
           </div>
         </div>
-        <div className="WeatherView-hourly">
-          <p>Hourly</p>
+        <div className="WeatherView-carousel">
+          {hourlyCurrentWeather &&
+            hourlyCurrentWeather.map((weatherHour) => {
+              return <WeatherCard {...weatherHour} />;
+            })}
         </div>
       </div>
     );
