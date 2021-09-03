@@ -3,6 +3,7 @@ import '../../styles/WeatherView.css';
 import { CurrentWeather, WeatherHour } from '../../types';
 import SearchForm from '../SearchForm/SearchForm';
 import WeatherCard from '../WeatherCard/WeatherCard';
+import WeatherHourCarousel from '../WeatherHourCarousel/WeatherHourCarousel';
 const WeatherView = ({
   currentWeather,
   updateLocation,
@@ -40,10 +41,11 @@ const WeatherView = ({
           </div>
         </div>
         <div className="WeatherView-carousel">
-          {hourlyCurrentWeather &&
+          {/* {hourlyCurrentWeather &&
             hourlyCurrentWeather.map((weatherHour) => {
               return <WeatherCard {...weatherHour} />;
-            })}
+            })} */}
+          {hourlyCurrentWeather && <WeatherHourCarousel hourlyWeather={hourlyCurrentWeather} />}
         </div>
       </div>
     );

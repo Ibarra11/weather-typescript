@@ -67,8 +67,10 @@
 }
 
 .WeatherView-carousel {
+  position: relative;
   flex-grow: 2;
-  border: 1px solid red;
+  border: 3px solid red;
   display: flex;
+  justify-content: center;
   width: 100%;
 }
