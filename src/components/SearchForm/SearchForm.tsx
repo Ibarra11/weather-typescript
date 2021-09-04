@@ -21,6 +21,7 @@ const SearchForm = ({
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [autoCompleteDropdown, setAutoCompleteDropdown] = useState<true | false>(false);
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
@@ -33,6 +34,7 @@ const SearchForm = ({
     if (response.data.length > 0) {
       results = response.data.map((location: { name: string }) => location.name);
       setSuggestions(results);
+      setAutoCompleteDropdown(true);
     }
   };
 
@@ -44,6 +46,11 @@ const SearchForm = ({
     }
   }, [inputValue]);
 
+  function handleLocationRequest(suggestion: string) {
+    setAutoCompleteDropdown(false);
+    updateLocation(suggestion);
+  }
+
   return (
     <div className="SearchForm">
       <div className="SearchForm-group">
@@ -54,10 +61,10 @@ const SearchForm = ({
           value={inputValue}
           onChange={handleInputChange}
         />
-        {suggestions.length > 0 && (
+        {autoCompleteDropdown && (
           <ul className="SearchForm-suggestions">
             {suggestions.map((suggestion) => {
-              return <li onClick={() => updateLocation(suggestion)}>{suggestion}</li>;
+              return <li onClick={() => handleLocationRequest(suggestion)}>{suggestion}</li>;
             })}
           </ul>
         )}
