@@ -7,14 +7,14 @@ import WeatherHourCarousel from '../WeatherHourCarousel/WeatherHourCarousel';
 const WeatherView = ({
   currentWeather,
   updateLocation,
-  hourlyCurrentWeather,
+  hourlyCurrentWeather = [],
 }: {
   currentWeather: CurrentWeather | undefined;
   updateLocation: React.Dispatch<React.SetStateAction<string>>;
   hourlyCurrentWeather: WeatherHour[] | undefined;
 }) => {
   let icon, temp_c, temp_f, text, last_updated;
-
+  console.log(hourlyCurrentWeather);
   function displayWeather() {
     const {
       condition: { icon, text },
@@ -45,7 +45,9 @@ const WeatherView = ({
             hourlyCurrentWeather.map((weatherHour) => {
               return <WeatherCard {...weatherHour} />;
             })} */}
-          {hourlyCurrentWeather && <WeatherHourCarousel hourlyWeather={hourlyCurrentWeather} />}
+          {hourlyCurrentWeather.length > 0 && (
+            <WeatherHourCarousel hourlyWeather={hourlyCurrentWeather} />
+          )}
         </div>
       </div>
     );

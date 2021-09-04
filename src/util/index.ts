@@ -5,8 +5,6 @@ const getDay = (date: string) => {
 };
 
 const getHourlyWeatherByDate = (forecastArr: ForecastDay[], date: number) => {
-  const result = [];
-  console.log(forecastArr);
   for (let i = 0; i < forecastArr.length; i++) {
     if (getDay(forecastArr[i].date) === date) {
       return forecastArr[i].hour;

@@ -26,6 +26,7 @@ function App() {
     const currentDay = getDay(current.last_updated);
 
     const hourlyWeatherCurrentDay = getHourlyWeatherByDate(forecast, currentDay);
+    console.log(hourlyWeatherCurrentDay);
     const { name, region } = res.data.location;
 
     setWeatherList(forecast);
