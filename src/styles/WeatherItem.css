@@ -1,6 +1,6 @@
 .WeatherItem {
   display: flex;
-  border: 1px solid yellow;
+
   justify-content: space-between;
   /* align-items: center; */
   padding: 1rem;
@@ -9,11 +9,10 @@
 
 .WeatherItem-icon {
   width: 75px;
-  border: 1px solid red;
 }
 .flex {
   display: flex;
-  border: 1px solid green;
+
   flex-grow: 1;
 }
 

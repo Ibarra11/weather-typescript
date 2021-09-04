@@ -8,7 +8,6 @@
 }
 
 .WeatherView-data {
-  border: 2px solid yellow;
   height: 75%;
   display: flex;
   flex-direction: column;
@@ -17,7 +16,7 @@
 
 .WeatherView-temp {
   display: flex;
-  border: 1px solid red;
+
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -30,7 +29,6 @@
 }
 
 .WeatherView-condition {
-  border: 1px solid blue;
   flex-grow: 1;
   width: 100%;
 }
@@ -48,7 +46,6 @@
 .WeatherView-location {
   font-size: 2.5rem;
   color: #edf6f9;
-  border: 1px solid orange;
   flex-grow: 1;
   width: 50%;
   display: flex;
@@ -62,14 +59,13 @@
   align-items: center;
   flex-grow: 3;
 
-  border: 1px solid green;
   width: 50%;
 }
 
 .WeatherView-carousel {
   position: relative;
   flex-grow: 2;
-  border: 3px solid red;
+  background: rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   width: 100%;

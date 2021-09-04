@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { WeatherHour } from '../../types';
 import WeatherCard from '../WeatherCard/WeatherCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import '../../styles/WeatherHourCarousel.css';
 const WeatherHourCarousel = ({ hourlyWeather }: { hourlyWeather: WeatherHour[] }) => {
   console.log(hourlyWeather);
@@ -8,10 +10,7 @@ const WeatherHourCarousel = ({ hourlyWeather }: { hourlyWeather: WeatherHour[] }
   const [carouselMaxIndex, setCarouselMaxIndex] = useState(carouselMinIndex + 8);
   function displayCarouselItems() {
     const results = [];
-    console.log(carouselMinIndex);
-    console.log(carouselMaxIndex);
     for (let i = carouselMinIndex; i < carouselMaxIndex; i++) {
-      console.log(hourlyWeather[i]);
       results.push(<WeatherCard {...hourlyWeather[i]} />);
     }
     return results;
@@ -41,11 +40,19 @@ const WeatherHourCarousel = ({ hourlyWeather }: { hourlyWeather: WeatherHour[] }
     <div className="WeatherHourCarousel">
       {displayCarouselItems()}
       <div className="WeatherHourCarousel-buttons">
-        <button data-direction="left" onClick={handleCarouselClick}>
-          left
+        <button
+          className="WeatherHourCarousel-btn-left"
+          data-direction="left"
+          onClick={handleCarouselClick}
+        >
+          <FontAwesomeIcon className="WeatherHourCarousel-icon" icon={faCaretLeft} />
         </button>
-        <button data-direction="right" onClick={handleCarouselClick}>
-          Right
+        <button
+          className="WeatherHourCarousel-btn-right"
+          data-direction="right"
+          onClick={handleCarouselClick}
+        >
+          <FontAwesomeIcon className="WeatherHourCarousel-icon" icon={faCaretRight} />
         </button>
       </div>
     </div>

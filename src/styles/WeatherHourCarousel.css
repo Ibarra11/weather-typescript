@@ -1,16 +1,39 @@
 .WeatherHourCarousel {
   display: flex;
-  border: 4px solid green;
   width: 90%;
 }
 
 .WeatherHourCarousel-buttons {
-  position: absolute;
-  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: 100%;
-  padding: 0 1rem;
+}
+
+.WeatherHourCarousel-btn-right,
+.WeatherHourCarousel-btn-left {
+  width: 5%;
+}
+
+.WeatherHourCarousel-btn-right {
+  position: absolute;
+}
+
+.WeatherHourCarousel-btn-left {
+  position: absolute;
   left: 0;
+}
+
+.WeatherHourCarousel-buttons > button {
+  background: none;
+  border: transparent;
+  height: 100%;
+  color: #edf6f9;
+}
+
+.WeatherHourCarousel-buttons > button:hover {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.6);
+}
+.svg-inline--fa.fa-w-6 {
+  width: 2.5rem;
+  height: 2.5rem;
 }

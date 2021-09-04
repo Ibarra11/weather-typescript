@@ -14,7 +14,7 @@ const WeatherView = ({
   hourlyCurrentWeather: WeatherHour[] | undefined;
 }) => {
   let icon, temp_c, temp_f, text, last_updated;
-  console.log(hourlyCurrentWeather);
+
   function displayWeather() {
     const {
       condition: { icon, text },
