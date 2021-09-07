@@ -4,20 +4,20 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const MY_KEY = process.env.REACT_APP_API_KEY;
+const { REACT_APP_API_KEY: key, REACT_APP_FORECAST_URL: baseUrl } = process.env;
 
 const SearchForm = ({
   location = 'location',
   type = 'text',
   placeholder = 'turlock',
   onChange = 'd',
-  updateLocation,
+  setUrl,
 }: {
   location: string;
   type: string;
   placeholder: string;
   onChange: string;
-  updateLocation: React.Dispatch<React.SetStateAction<string>>;
+  setUrl: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -29,7 +29,7 @@ const SearchForm = ({
   const searchRequest = async (value: string) => {
     let results: string[];
     const response = await axios.get(
-      `http://api.weatherapi.com/v1/search.json?key=${MY_KEY}&q=${inputValue}`,
+      `http://api.weatherapi.com/v1/search.json?key=${key}&q=${inputValue}`,
     );
     if (response.data.length > 0) {
       results = response.data.map((location: { name: string }) => location.name);
@@ -46,9 +46,10 @@ const SearchForm = ({
     }
   }, [inputValue]);
 
-  function handleLocationRequest(suggestion: string) {
-    setAutoCompleteDropdown(false);
-    updateLocation(suggestion);
+  function handleUrlRequest(location: string) {
+    console.log(baseUrl);
+    const url = `${baseUrl + key!}&Q=${location}&days=7&aqi=no&alerts=no`;
+    setUrl(url);
   }
 
   return (
@@ -64,7 +65,7 @@ const SearchForm = ({
         {autoCompleteDropdown && (
           <ul className="SearchForm-suggestions">
             {suggestions.map((suggestion) => {
-              return <li onClick={() => handleLocationRequest(suggestion)}>{suggestion}</li>;
+              return <li onClick={() => handleUrlRequest(suggestion)}>{suggestion}</li>;
             })}
           </ul>
         )}

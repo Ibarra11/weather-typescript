@@ -1,6 +1,20 @@
+export type WeatherApiResponse = {
+  current: CurrentWeather;
+  forecast: {
+    forecastday: ForecastDay[];
+  };
+  location: Location;
+};
+
+export type Location = {
+  country: string;
+  localtime: string;
+  name: string;
+  region: string;
+};
+
 export type CurrentWeather = {
   condition: { text: string; icon: string; code: number };
-  last_updated: string;
   temp_c: number;
   temp_f: number;
   location: string;
@@ -14,6 +28,7 @@ export type WeatherListType = {
 };
 
 export type WeatherDay = {
+  date: string;
   avgtemp_c: number;
   avgtemp_f: number;
   condition: {
@@ -29,7 +44,6 @@ export type WeatherDay = {
 
 export type WeatherHour = {
   condition: { text: string; icon: string };
-
   temp_c: number;
   temp_f: number;
   time: string;

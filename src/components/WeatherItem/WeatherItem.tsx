@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { Degrees, ForecastDay } from '../../types';
+import { Degrees, ForecastDay, WeatherDay } from '../../types';
 import '../../styles/WeatherItem.css';
-const WeatherItem = ({ date, day, hour }: ForecastDay) => {
+const WeatherItem = ({
+  date,
+  day,
+  hour,
+  handleForecastChange,
+}: ForecastDay & { handleForecastChange: (forecastDay: WeatherDay) => void }) => {
   const { icon } = day.condition;
   const { avgtemp_f, avgtemp_c } = day;
   const [tempDegree, setTempDegree] = useState<Degrees['degree']>('F');
@@ -10,7 +15,7 @@ const WeatherItem = ({ date, day, hour }: ForecastDay) => {
     setTempDegree(deg);
   };
   return (
-    <div className="WeatherItem">
+    <div className="WeatherItem" onClick={() => handleForecastChange({ ...day })}>
       <img className="WeatherItem-icon" src={`https:${icon}`} alt="weather icon" />
 
       <div className="flex">

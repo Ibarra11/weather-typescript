@@ -20,7 +20,6 @@ const WeatherView = ({
       condition: { icon, text },
       temp_c,
       temp_f,
-      last_updated,
       location,
     } = currentWeather!;
     return (
@@ -54,13 +53,13 @@ const WeatherView = ({
   }
   return (
     <div className="WeatherView">
-      <SearchForm
+      {/* <SearchForm
         updateLocation={updateLocation}
         location="Turlock"
         placeholder="Search Location"
         onChange={'hello'}
         type="text"
-      />
+      /> */}
       {currentWeather ? displayWeather() : null}
     </div>
   );

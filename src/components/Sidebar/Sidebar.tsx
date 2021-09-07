@@ -1,12 +1,14 @@
 import React from 'react';
 import '../../styles/Sidebar.css';
 import WeatherList from '../WeatherList/WeatherList';
-import { ForecastDay } from '../../types';
-const Sidebar = (props: { weatherList: ForecastDay[] }) => {
-  console.log(props);
+import { ForecastDay, WeatherDay } from '../../types';
+const Sidebar = (props: {
+  weatherList: ForecastDay[];
+  handleForecastChange: (forecastDay: WeatherDay) => void;
+}) => {
   return (
     <div className="Sidebar">
-      <WeatherList weatherList={props.weatherList} />
+      <WeatherList {...props} />
     </div>
   );
 };

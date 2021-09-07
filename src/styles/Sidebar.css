@@ -1,4 +1,4 @@
 .Sidebar {
-  grid-column: 1;
-  background-color: #2e4057;
+  grid-area: Sidebar;
+  background-color: #f8f9fa;
 }

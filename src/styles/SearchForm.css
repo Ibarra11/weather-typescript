@@ -1,12 +1,15 @@
 .SearchForm {
-  height: 25%;
+  background-color: #34919e;
+  grid-area: SearchForm;
   display: flex;
+  padding: 0 1rem;
+
   justify-content: center;
   align-items: center;
 }
 .SearchForm-group {
   position: relative;
-  width: 35%;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
 }

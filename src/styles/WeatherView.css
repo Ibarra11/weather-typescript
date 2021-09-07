@@ -1,5 +1,5 @@
 .WeatherView {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../images/clouds.jpg);
+  grid-area: WeatherView;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
@@ -16,7 +16,6 @@
 
 .WeatherView-temp {
   display: flex;
-
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -58,7 +57,6 @@
   flex-direction: column;
   align-items: center;
   flex-grow: 3;
-
   width: 50%;
 }
 
