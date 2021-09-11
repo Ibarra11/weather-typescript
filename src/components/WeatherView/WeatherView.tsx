@@ -1,20 +1,19 @@
 import React from 'react';
 import '../../styles/WeatherView.css';
 import { CurrentWeather, WeatherHour } from '../../types';
-import SearchForm from '../SearchForm/SearchForm';
-import WeatherCard from '../WeatherCard/WeatherCard';
+
 import WeatherHourCarousel from '../WeatherHourCarousel/WeatherHourCarousel';
 const WeatherView = ({
   currentWeather,
-  updateLocation,
+
   hourlyCurrentWeather = [],
 }: {
   currentWeather: CurrentWeather | undefined;
-  updateLocation: React.Dispatch<React.SetStateAction<string>>;
+
   hourlyCurrentWeather: WeatherHour[] | undefined;
 }) => {
   let icon, temp_c, temp_f, text, last_updated;
-
+  console.log(currentWeather);
   function displayWeather() {
     const {
       condition: { icon, text },
@@ -40,10 +39,6 @@ const WeatherView = ({
           </div>
         </div>
         <div className="WeatherView-carousel">
-          {/* {hourlyCurrentWeather &&
-            hourlyCurrentWeather.map((weatherHour) => {
-              return <WeatherCard {...weatherHour} />;
-            })} */}
           {hourlyCurrentWeather.length > 0 && (
             <WeatherHourCarousel hourlyWeather={hourlyCurrentWeather} />
           )}
@@ -51,18 +46,7 @@ const WeatherView = ({
       </div>
     );
   }
-  return (
-    <div className="WeatherView">
-      {/* <SearchForm
-        updateLocation={updateLocation}
-        location="Turlock"
-        placeholder="Search Location"
-        onChange={'hello'}
-        type="text"
-      /> */}
-      {currentWeather ? displayWeather() : null}
-    </div>
-  );
+  return <div className="WeatherView">{currentWeather ? displayWeather() : null}</div>;
 };
 
 export default WeatherView;

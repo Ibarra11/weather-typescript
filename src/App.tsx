@@ -3,73 +3,72 @@ import useFetch from './hooks/useFetch';
 import Sidebar from './components/Sidebar/Sidebar';
 import WeatherView from './components/WeatherView/WeatherView';
 import SearchForm from './components/SearchForm/SearchForm';
-import { CurrentWeather, ForecastDay, WeatherDay, WeatherHour, WeatherApiResponse } from './types';
-import { getDay, getHourlyWeatherByDate } from './util';
-import './App.css';
-import axios from 'axios';
+import Loader from 'react-loader-spinner';
+import {
+  CurrentWeather,
+  ForecastDay,
+  WeatherDay,
+  WeatherHour,
+  WeatherApiResponse,
+  Location,
+} from './types';
 
-const MY_KEY = process.env.REACT_APP_API_KEY;
-const BASE_URL = 'http://api.weatherapi.com/v1/forecast.json?key=';
+import './App.css';
 
 function App() {
-  const [url, setUrl] = useState<string>('');
+  // const [url, setUrl] = useState<string>('');
   const [weatherList, setWeatherList] = useState<ForecastDay[]>([]);
   const [currentWeather, setCurrentWeather] = useState<CurrentWeather | undefined>();
-  const [data, loading] = useFetch<WeatherApiResponse>(url);
-  const [location, setLocation] = useState('');
+  const [weatherData, setWeatherData] = useState<WeatherApiResponse | undefined>();
+  // const [data, status] = useFetch<WeatherApiResponse>(url);
+  const [location, setLocation] = useState<Location | null>();
   const [hourlyCurrentWeather, setHourlyCurrentWeather] = useState<WeatherHour[] | undefined>([]);
 
   useEffect(() => {
-    console.log(data);
-    if (data) {
+    console.log(weatherData);
+    if (weatherData) {
+      console.log(weatherData);
       const {
         current,
-        location,
         forecast: { forecastday },
-      } = data;
+        location,
+      } = weatherData;
       setWeatherList(forecastday);
-      setCurrentWeather({ ...current });
+      setCurrentWeather({ ...current, location: `${location.name}, ${location.region}` });
       setHourlyCurrentWeather(forecastday[0].hour);
+      setLocation(location);
     }
-  }, [data]);
 
-  // async function requestForecast() {
-  //   const res = await axios.get(`${BASE_URL}${MY_KEY}&Q=${location}&days=7&aqi=no&alerts=no`);
-
-  //   const { forecastday: forecast }: { forecastday: ForecastDay[] } = res.data.forecast;
-  //   const { current }: { current: CurrentWeather } = res.data;
-  //   console.log(current);
-  //   console.log(forecast);
-  //   // const currentDay = getDay(current.last_updated);
-
-  //   // const hourlyWeatherCurrentDay = getHourlyWeatherByDate(forecast, currentDay);
-
-  //   const { name, region } = res.data.location;
-
-  //   setWeatherList(forecast);
-  //   setCurrentWeather({ ...current, location: name + ',' + region });
-  //   setHourlyCurrentWeather(forecast[0].hour);
-  // }
+    // if (data) {
+    //   const {
+    //     current,
+    //     location,
+    //     forecast: { forecastday },
+    //   } = data;
+    //   setWeatherList(forecastday);
+    //   setCurrentWeather({ ...current, location: `${location.name}, ${location.region}` });
+    //   setHourlyCurrentWeather(forecastday[0].hour);
+    //   setLocation(location);
+    // }
+  }, [weatherData]);
 
   const handleForecastChange = (forecastDay: WeatherDay) => {
     const { avgtemp_c: temp_c, avgtemp_f: temp_f, condition } = forecastDay;
-    setCurrentWeather({ temp_c, temp_f, condition, location });
+    if (location) {
+      setCurrentWeather({
+        temp_c,
+        temp_f,
+        condition,
+        location: `${location.name}, ${location.region}`,
+      });
+    }
   };
   return (
     <div className="App">
       <Sidebar weatherList={weatherList} handleForecastChange={handleForecastChange} />
-      <SearchForm
-        setUrl={setUrl}
-        location="Turlock"
-        placeholder="Search Location"
-        onChange={'hello'}
-        type="text"
-      />
-      <WeatherView
-        updateLocation={setLocation}
-        currentWeather={currentWeather}
-        hourlyCurrentWeather={hourlyCurrentWeather}
-      />
+      <SearchForm setWeatherData={setWeatherData} placeholder="Search Location" type="text" />
+      <WeatherView currentWeather={currentWeather} hourlyCurrentWeather={hourlyCurrentWeather} />
+      {/* {status === 'pending' ? <Loader type="Rings" color="#00BFFF" height={80} width={80} /> : null} */}
     </div>
   );
 }

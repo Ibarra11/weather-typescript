@@ -58,3 +58,10 @@ export type ForecastDay = {
   day: WeatherDay;
   hour: WeatherHour[];
 };
+
+export type Status = 'idle' | 'pending' | 'resolved' | 'rejected';
+
+export type AutoCompleteSuggestion = {
+  id: number;
+  name: string;
+};
