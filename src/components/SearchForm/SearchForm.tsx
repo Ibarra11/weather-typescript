@@ -4,24 +4,17 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import useFetch from '../../hooks/useFetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
-import {
-  CurrentWeather,
-  ForecastDay,
-  Location,
-  WeatherApiResponse,
-  Status,
-  AutoCompleteSuggestion,
-} from '../../types';
+import { WeatherApiResponse, AutoCompleteSuggestion, Location } from '../../types';
 const { REACT_APP_API_KEY: key, REACT_APP_FORECAST_URL: baseUrl } = process.env;
 
 const SearchForm = ({
   type = 'text',
-  placeholder = 'turlock',
+  placeholder,
   setWeatherData,
 }: {
   type: string;
-  placeholder: string;
-  setWeatherData: React.Dispatch<React.SetStateAction<WeatherApiResponse | undefined>>;
+  placeholder: string | Location;
+  setWeatherData: React.Dispatch<React.SetStateAction<WeatherApiResponse | string>>;
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [url, setUrl] = useState('');
@@ -33,18 +26,6 @@ const SearchForm = ({
     setInputValue(event.target.value);
   };
 
-  // const searchRequest = async (value: string) => {
-  //   let results: string[];
-  //   const response = await axios.get(
-  //     `http://api.weatherapi.com/v1/search.json?key=${key}&q=${inputValue}`,
-  //   );
-  //   if (response.data.length > 0) {
-  //     results = response.data.map((location: { name: string }) => location.name);
-  //     setSuggestions(results);
-  //     setAutoCompleteDropdown(true);
-  //   }
-  // };
-
   // In this case, on
 
   useEffect(() => {
@@ -53,8 +34,10 @@ const SearchForm = ({
         setSuggestions(data);
         setAutoCompleteDropdown(true);
       } else {
-        setWeatherData(data);
-        setAutoCompleteDropdown(false);
+        if (data) {
+          setWeatherData(data);
+          setAutoCompleteDropdown(false);
+        }
       }
     }
   }, [status]);
@@ -70,21 +53,8 @@ const SearchForm = ({
   function handleCityWeatherRequest(location: string) {
     if (baseUrl && key) {
       setUrl(`${baseUrl + key}&Q=${location}&days=7&aqi=no&alerts=no`);
-      // setUrl(
-      //   'http://api.weatherapi.com/v1/forecast.json?key=e1921aabbfba4176be370722212408&q=London&days=7&aqi=no&alerts=no',
-      // );
     }
   }
-
-  // function handleUrlRequest(location: string) {
-  //   console.log(data);
-  //   console.log(location);
-  //   // const url = `${baseUrl + key!}&Q=${location}&days=7&aqi=no&alerts=no`;
-  //   // setUrl(
-  //   //   'http://api.weatherapi.com/v1/forecast.json?key=e1921aabbfba4176be370722212408&q=Turlock, California, United States of America&days=10&aqi=no&alerts=no',
-  //   // );
-  //   setAutoCompleteDropdown(false);
-  // }
 
   return (
     <div className="SearchForm">
@@ -92,7 +62,11 @@ const SearchForm = ({
         <input
           className="SearchForm-input"
           type={type}
-          placeholder={placeholder}
+          placeholder={
+            typeof placeholder === 'string'
+              ? 'Enter Location'
+              : `${placeholder.name}, ${placeholder.region}`
+          }
           value={inputValue}
           onChange={handleInputChange}
         />
