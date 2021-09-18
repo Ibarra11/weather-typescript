@@ -59,9 +59,20 @@ export type ForecastDay = {
   hour: WeatherHour[];
 };
 
-export type Status = 'idle' | 'pending' | 'resolved' | 'rejected';
+// export type Status = 'idle' | 'pending' | 'resolved' | 'rejected';
 
 export type AutoCompleteSuggestion = {
   id: number;
   name: string;
+};
+
+export type Action<T> =
+  | { type: 'FETCH_INIT' }
+  | { type: 'FETCH_SUCCESS'; payload: T }
+  | { type: 'FETCH_FAILURE'; error: Error };
+
+export type ReducerState<T> = {
+  data?: T;
+  error?: Error;
+  isLoading: boolean;
 };

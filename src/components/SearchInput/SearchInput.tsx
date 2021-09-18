@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../styles/SearchInput.css';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import useFetch from '../../hooks/useFetch';
+import AutoCompleteDropdown from '../AutoCompleteDropdown/AutoCompleteDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WeatherApiResponse, AutoCompleteSuggestion, Location } from '../../types';
 const { REACT_APP_API_KEY: key, REACT_APP_FORECAST_URL: baseUrl } = process.env;
@@ -18,29 +19,26 @@ const SearchInput = ({
   const [inputValue, setInputValue] = useState('');
   const [url, setUrl] = useState('');
   const [suggestions, setSuggestions] = useState<AutoCompleteSuggestion[]>([]);
-  const [autoCompleteDropdown, toggleAutoCompleteDropdown] = useState<true | false>(false);
-  const [data, status, error] = useFetch<AutoCompleteSuggestion[] | WeatherApiResponse>(url);
+  const { data, error, isLoading } = useFetch<AutoCompleteSuggestion[] | WeatherApiResponse>(url);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
   useEffect(() => {
-    if (status === 'resolved') {
+    if (isLoading === false) {
       if (Array.isArray(data)) {
         setSuggestions(data);
-        toggleAutoCompleteDropdown(true);
       } else {
         if (data) {
           setWeatherData(data);
-          toggleAutoCompleteDropdown(false);
         }
       }
-    } else if (status === 'rejected') {
+    } else if (error) {
       setInputValue('');
       setWeatherData('');
     }
-  }, [data, setWeatherData, status]);
+  }, [data, setWeatherData, isLoading]);
 
   useEffect(() => {
     if (inputValue.length > 2) {
@@ -71,17 +69,10 @@ const SearchInput = ({
           onChange={handleInputChange}
         />
         {error && <p className="SearchInput-error">{error}</p>}
-        {autoCompleteDropdown && (
-          <ul className="SearchInput-suggestions">
-            {suggestions.map((suggestion) => {
-              return (
-                <li key={suggestion.id} onClick={() => handleCityWeatherRequest(suggestion.name)}>
-                  {suggestion.name}
-                </li>
-              );
-            })}
-          </ul>
-        )}
+        <AutoCompleteDropdown
+          suggestions={suggestions}
+          handleCityWeatherRequest={handleCityWeatherRequest}
+        />
       </div>
       <button onClick={() => handleCityWeatherRequest(inputValue)} className="SearchInput-button">
         <FontAwesomeIcon icon={faSearch} />
