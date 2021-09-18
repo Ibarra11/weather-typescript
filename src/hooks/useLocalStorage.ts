@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
-function useLocalStorage<T>(
-  key: string,
-  initialValue: T,
-): [T, React.Dispatch<React.SetStateAction<T>>] {
+function useLocalStorage<T>(key: string, initialValue: T) {
   const [storageValue, setStorageValue] = useState<T>(() => {
     const localStorageItem = window.localStorage.getItem(key);
     return localStorageItem ? JSON.parse(localStorageItem) : initialValue;
@@ -12,7 +9,7 @@ function useLocalStorage<T>(
     window.localStorage.setItem(key, JSON.stringify(storageValue));
   }, [key, storageValue]);
 
-  return [storageValue, setStorageValue];
+  return [storageValue, setStorageValue] as const;
 }
 
 export default useLocalStorage;

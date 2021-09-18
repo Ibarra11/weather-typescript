@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import Sidebar from './components/Sidebar/Sidebar';
 import WeatherView from './components/WeatherView/WeatherView';
-import SearchForm from './components/SearchForm/SearchForm';
+import SearchInput from './components/SearchInput/SearchInput';
 import useLocalStorage from './hooks/useLocalStorage';
+import WeatherList from './components/WeatherList/WeatherList';
 import Loader from 'react-loader-spinner';
 import {
   CurrentWeather,
@@ -19,7 +20,6 @@ import './App.css';
 function App() {
   const [weatherList, setWeatherList] = useState<ForecastDay[]>([]);
   const [currentWeather, setCurrentWeather] = useState<CurrentWeather | undefined>();
-  // const [weatherData, setWeatherData] = useState<WeatherApiResponse | undefined>();
   const [location, setLocation] = useState<Location | null>(null);
   const [hourlyCurrentWeather, setHourlyCurrentWeather] = useState<WeatherHour[] | undefined>([]);
   const [weatherData, setWeatherData] = useLocalStorage<WeatherApiResponse | string>(
@@ -54,8 +54,10 @@ function App() {
   };
   return (
     <div className="App">
-      <Sidebar weatherList={weatherList} handleForecastChange={handleForecastChange} />
-      <SearchForm
+      <Sidebar>
+        <WeatherList weatherList={weatherList} handleForecastChange={handleForecastChange} />
+      </Sidebar>
+      <SearchInput
         setWeatherData={setWeatherData}
         placeholder={location ? location : 'Enter Location'}
         type="text"

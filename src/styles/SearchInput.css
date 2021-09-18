@@ -1,19 +1,19 @@
-.SearchForm {
+.SearchInput {
+  position: relative;
   background-color: #34919e;
-  grid-area: SearchForm;
+  grid-area: SearchInput;
   display: flex;
   padding: 0 1rem;
-
   justify-content: center;
   align-items: center;
 }
-.SearchForm-group {
+.SearchInput-group {
   position: relative;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
-.SearchForm-input {
+.SearchInput-input {
   width: 100%;
   padding: 0.5rem;
   border: none;
@@ -21,17 +21,17 @@
   font-size: 1rem;
 }
 
-.SearchForm-input:focus {
+.SearchInput-input:focus {
   outline: none;
 }
 
-.SearchForm-button {
+.SearchInput-button {
   padding: 0.5rem;
   border-radius: 0.5rem;
   border: none;
 }
 
-.SearchForm-suggestions {
+.SearchInput-suggestions {
   position: absolute;
   top: 100%;
   width: 100%;
@@ -40,7 +40,7 @@
   list-style-type: none;
 }
 
-.SearchForm-suggestions > li {
+.SearchInput-suggestions > li {
   font-size: 1.2rem;
   background-color: white;
   border-top: 1px solid black;
@@ -48,7 +48,18 @@
   padding: 0.5rem;
 }
 
-.SearchForm-suggestions > li:hover {
+.SearchInput-suggestions > li:hover {
   background-color: lightgray;
   cursor: pointer;
+}
+
+.SearchInput-error {
+  background-color: #e63946;
+  width: 100%;
+  padding: 0.5rem;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  position: absolute;
+  top: 100%;
 }
